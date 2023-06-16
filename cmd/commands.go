@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"path/filepath"
 
 	grpcclient "QuicksilverDumper/client/grpc"
 	"QuicksilverDumper/output"
@@ -132,10 +130,6 @@ func executeCommand(cmd *cobra.Command, args []string) error {
 	}
 
 	logger.Infof("writing %s result into %s in %s format", cmd.Use, outputFile, format)
-	if err = os.MkdirAll(filepath.Dir(outputFile), os.ModeDir); err != nil {
-		return fmt.Errorf("failed to create output directory: %w", err)
-	}
-
 	outputer, err := output.GetCSVOutputer(res)
 	if err != nil {
 		return fmt.Errorf("failed to get outputer: %w", err)

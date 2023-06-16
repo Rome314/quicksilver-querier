@@ -42,10 +42,6 @@ The app also accepts the following task names:
 
 ## Example
 
-```bash
-./quickdump  --format csv --output ./data.csv GetAllValidatorsAndDelegators
-```
-
 ### Pending Staking Receipts
 To get all pending staking receipts, run:
 

@@ -4,6 +4,7 @@ import (
 	"encoding/csv"
 	"fmt"
 	"os"
+	"path/filepath"
 )
 
 type CsvOutputer struct {
@@ -19,8 +20,9 @@ func NewCsvOutputer(val interface{}) (CsvOutputer, error) {
 }
 
 func (c CsvOutputer) WriteToFile(path string) error {
-	// Create a CSV file
-	file, err := os.Open(path)
+	err := os.MkdirAll(filepath.Dir(path), os.ModePerm)
+	// Open a CSV file
+	file, err := os.OpenFile(path, os.O_RDWR|os.O_CREATE, 0666)
 	if err != nil {
 		return fmt.Errorf("could not create CSV file: %e", err)
 
